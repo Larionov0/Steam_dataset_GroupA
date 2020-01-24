@@ -1,0 +1,10 @@
+release_date
+developer
+platforms (;)
+categories (count and graphic)
+genres
+positive_ratings
+negative_ratings
+average_playtime
+owners
+price
