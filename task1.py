@@ -3,7 +3,15 @@ def max_getter(developers_struct):
     :param developers_struct: <dict> Структура со всеми разработчиками
     :return: <list> Список игр разработчика с максимальным колличеством игр
     """
-    pass
+    max_count = float('-inf')
+    max_dev = ""
+    for dev in developers_struct:
+        games_count = len(developers_struct[dev])
+        if games_count > max_count:
+            max_count = games_count
+            max_dev = dev
+
+    return developers_struct[max_dev]
 
 
 def counter(developers_struct):

@@ -1,14 +1,17 @@
-def counter(developers_struct):
+def max_getter(developers_struct):
     """
-    :param developers_struct: Структура со всеми разработчиками
-    :return: Два списка: список разрабов, и список колличеств игр каждого из них
+    :param developers_struct: <dict> Структура со всеми разработчиками
+    :return: <list> Список игр разработчика с максимальным колличеством игр
     """
-    developers_list = []
-    counts_list = []
+    max_count = float('-inf')
+    max_dev = ""
     for dev in developers_struct:
-        developers_list.append(dev)
-        counts_list.append(len(developers_struct[dev]))
-    return developers_list, counts_list
+        games_count = len(developers_struct[dev])
+        if games_count > max_count:
+            max_count = games_count
+            max_dev = dev
+
+    return developers_struct[max_dev]
 
 
 developers_struct = {
@@ -26,10 +29,8 @@ developers_struct = {
         {
             "id": "",
             'name': "..."
-        }
+        },
     ]
 }
 
-developers_list, counts_list = counter(developers_struct)
-print(developers_list)
-print(counts_list)
+print(max_getter(developers_struct))
