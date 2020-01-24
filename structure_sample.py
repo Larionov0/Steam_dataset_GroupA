@@ -1,4 +1,4 @@
-developers = {
+developers_struct = {
     "Valve": [
         {
             "id": "123",

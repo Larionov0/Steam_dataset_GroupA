@@ -11,7 +11,12 @@ def counter(developers_struct):
     :param developers_struct: Структура со всеми разработчиками
     :return: Два списка: список разрабов, и список колличеств игр каждого из них
     """
-    pass
+    developers_list = []
+    counts_list = []
+    for dev in developers_struct:
+        developers_list.append(dev)
+        counts_list.append(len(developers_struct[dev]))
+    return developers_list, counts_list
 
 
 def informator(csv_filename):
@@ -57,3 +62,7 @@ def main():
     games_of_max_developer = max_getter(developers_struct)
     printer(games_of_max_developer)
     painter(developers_list, counts_list)
+
+
+if __name__ == "__main__":
+    main()
