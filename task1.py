@@ -1,3 +1,7 @@
+import plotly
+import plotly.graph_objects as go
+
+
 def max_getter(developers_struct):
     """
     :param developers_struct: <dict> Структура со всеми разработчиками
@@ -81,7 +85,8 @@ def painter(developers, counts):
     :param counts: <list> Список соответствующих количеств игр
     :return: None
     """
-    pass
+    diagram = go.Pie(x=developers, y = counts, name="Developers")
+    plotly.offline.plot([diagram], filename='developers.html')
 
 
 def main():
