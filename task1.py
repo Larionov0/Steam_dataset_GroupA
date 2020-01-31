@@ -22,6 +22,7 @@ def counter(developers_struct):
     """
     :param developers_struct: Структура со всеми разработчиками
     :return: Два списка: список разрабов, и список колличеств игр каждого из них
+
     """
     developers_list = []
     counts_list = []
@@ -65,6 +66,7 @@ def informator(csv_filename):
                 developers_struct[developer].append(game)
             else:
                 developers_struct[developer] = [game]
+    return developers_struct
 
 
 def printer(games):
@@ -78,6 +80,26 @@ def printer(games):
         print(f'{game["id"]} - {game["name"]}')
 
 
+def vijimatel(developers, counts, count=40):
+    """
+    Выжимает топ 40 разработчиков из соответствующих списков
+    :param developers: <list>
+    :param counts: <list>
+    :return: обрезанные списки
+    """
+    ogr = len(counts) - 1
+    while ogr >= len(counts) - count:
+        i = 0
+        while i < ogr:
+            if counts[i] > counts[i + 1]:
+                counts[i], counts[i + 1] = counts[i + 1], counts[i]
+                developers[i], developers[i + 1] = developers[i + 1], developers[i]
+            i += 1
+        ogr -= 1
+
+    return developers[-count:], counts[-count:]
+
+
 def painter(developers, counts):
     """
     Строит график
@@ -85,7 +107,8 @@ def painter(developers, counts):
     :param counts: <list> Список соответствующих количеств игр
     :return: None
     """
-    diagram = go.Pie(x=developers, y = counts, name="Developers")
+    developers, counts = vijimatel(developers, counts)
+    diagram = go.Pie(labels=developers, values=counts, name="Developers")
     plotly.offline.plot([diagram], filename='developers.html')
 
 

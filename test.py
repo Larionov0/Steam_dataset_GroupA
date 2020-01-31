@@ -1,31 +1,26 @@
-def printer(games):
+def vijimatel(developers, counts, count=40):
     """
-    Выводит АЙДИ и названия игр от разработчика,
-    который выпустил больше всего игр
-    :param games: список из словарей-игр одного разработчика
-    :return: None
+    Выжимает топ 40 разработчиков из соответствующих списков
+    :param developers: <list>
+    :param counts: <list>
+    :return: обрезанные списки
     """
-    for game in games:
-        print(f'{game["id"]} - {game["name"]}')
+    ogr = len(counts) - 1
+    while ogr >= len(counts) - count:
+        i = 0
+        while i < ogr:
+            if counts[i] > counts[i + 1]:
+                counts[i], counts[i + 1] = counts[i + 1], counts[i]
+                developers[i], developers[i + 1] = developers[i + 1], developers[i]
+            i += 1
+        ogr -= 1
+
+    return developers[-count:], counts[-count:]
 
 
-developers_struct = {
-    "Valve": [
-        {
-            "id": 123,
-            'name': "Counter - ..."
-        },
-        {
-            "id": 111,
-            'name': "Adventure"
-        }
-    ],
-    "Pup": [
-        {
-            "id": 0,
-            'name': "..."
-        },
-    ]
-}
+developers = ['lol', 'kek', 'azaza', 'pup', 'geg']
+counts = [1, 5, 7, 2, 0]
 
-printer(developers_struct["Valve"])
+developers, counts = vijimatel(developers, counts, count=2)
+print(developers)
+print(counts)
