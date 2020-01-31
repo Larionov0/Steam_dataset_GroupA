@@ -70,7 +70,8 @@ def printer(games):
     :param games: список из словарей-игр одного разработчика
     :return: None
     """
-    pass
+    for game in games:
+        print(f'{game["id"]} - {game["name"]}')
 
 
 def painter(developers, counts):
