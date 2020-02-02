@@ -1,26 +1,17 @@
-def vijimatel(developers, counts, count=40):
-    """
-    Выжимает топ 40 разработчиков из соответствующих списков
-    :param developers: <list>
-    :param counts: <list>
-    :return: обрезанные списки
-    """
-    ogr = len(counts) - 1
-    while ogr >= len(counts) - count:
-        i = 0
-        while i < ogr:
-            if counts[i] > counts[i + 1]:
-                counts[i], counts[i + 1] = counts[i + 1], counts[i]
-                developers[i], developers[i + 1] = developers[i + 1], developers[i]
-            i += 1
-        ogr -= 1
-
-    return developers[-count:], counts[-count:]
+def super_split(string, sep, bracket='"'):
+    ignore = False
+    words = []
+    start_index = 0
+    for i in range(len(string)):
+        if string[i] == bracket:
+            ignore = not ignore
+        elif string[i] == sep and not ignore:
+            substring = string[start_index:i]
+            words.append(substring)
+            start_index = i + 1
+    return words
 
 
-developers = ['lol', 'kek', 'azaza', 'pup', 'geg']
-counts = [1, 5, 7, 2, 0]
+text = "Kek,lol,azaza,\"I, I, I\",100"
 
-developers, counts = vijimatel(developers, counts, count=2)
-print(developers)
-print(counts)
+print(super_split(text, ","))
